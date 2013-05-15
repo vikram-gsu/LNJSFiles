@@ -8,10 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace sampleWebApp1 {
+namespace testApplication1 {
     
     
-    public partial class _Default {
+    public partial class testPage {
         
         /// <summary>
         /// form1 control.
@@ -23,12 +23,12 @@ namespace sampleWebApp1 {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// lblValue control.
+        /// btnSubmit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblValue;
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }

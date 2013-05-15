@@ -4,12 +4,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AC19B847-3CEB-425B-8708-CBC4DDF661A1}</ProjectGuid>
+    <ProjectGuid>{584938CE-9FAA-43EB-84DB-D192086CA5A8}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>sampleWebApp1</RootNamespace>
-    <AssemblyName>sampleWebApp1</AssemblyName>
+    <RootNamespace>testApplication1</RootNamespace>
+    <AssemblyName>testApplication1</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,7 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -54,7 +53,26 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CSS\classic-min.css" />
+    <Content Include="CSS\classic.css" />
+    <Content Include="CSS\icons-classic\label.png" />
+    <Content Include="CSS\icons-classic\resultset_next.png" />
+    <Content Include="CSS\icons-classic\resultset_previous.png" />
+    <Content Include="CSS\iThing-min.css" />
+    <Content Include="CSS\iThing.css" />
+    <Content Include="CSS\jquery.selectbox.css" />
     <Content Include="Default.aspx" />
+    <Content Include="CSS\jquery-ui.css" />
+    <Content Include="Scripts\jQDateRangeSlider-withRuler-min.js" />
+    <Content Include="Scripts\jquery-1.2.6-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.2.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.selectbox-0.2.js" />
+    <Content Include="img\select-icons.png" />
+    <Content Include="Scripts\jquery.selectbox-0.2.min.js" />
+    <Content Include="testPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +84,13 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testPage.aspx.cs">
+      <DependentUpon>testPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="testPage.aspx.designer.cs">
+      <DependentUpon>testPage.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -85,7 +110,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>60523</DevelopmentServerPort>
+          <DevelopmentServerPort>52369</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
