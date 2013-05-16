@@ -30,6 +30,7 @@
             $("select").selectbox();
             
             $("#btnSubmit").button();
+<<<<<<< HEAD
             $("#progressbar").progressbar({ value: 0 });
 
            
@@ -61,11 +62,20 @@
                         $("#result").text(msg.d);
                         clearInterval(intervalID);
                     }
+=======
+            var radioSelected;
+            $("input:radio[name=radio]").click(function() {
+
+                radioSelected = $("#radio :radio:checked + label").text();
+                $("#<%=hifType.ClientID%>").val(radioSelected);
+                //alert(radioSelected);
+>>>>>>> 84b0c0b... basic working app
 
                 });
 
                 //alert(radioSelected);
             });
+<<<<<<< HEAD
 
             function updateProgress() {
                 var value = $("#progressbar").progressbar("option", "value");
@@ -74,6 +84,25 @@
                 }
             }
 
+=======
+            $("#btnSubmit").click(function() {
+                var modelVal = $("#model_id option:selected").val();
+                var versionVal = $("#version_id option:selected").val();
+                var modeVal = $("#mode_id option:selected").val();
+                var envVal = $("#env_id option:selected").val();
+                var restrictionVal = $("#restriction_id option:selected").val();
+                var customerVal = $("#customer_id option:selected").val();
+
+                $("#<%=hifModel.ClientID%>").val(modelVal);
+                $("#<%=hifVersion.ClientID%>").val(versionVal);
+                $("#<%=hifMode.ClientID%>").val(modeVal);
+                $("#<%=hifEnv.ClientID%>").val(envVal);
+                $("#<%=hifRestriction.ClientID%>").val(restrictionVal);
+                $("#<%=hifCustomer.ClientID%>").val(customerVal);
+                alert(radioSelected);
+            });
+
+>>>>>>> 84b0c0b... basic working app
             $("#dateSlider").bind("userValuesChanged", function(e, data) {
                 var prevDate = data.values.min;
                 var year = String(prevDate.getFullYear());
@@ -82,7 +111,11 @@
                 if (month < 10) month = "0" + month;
                 if (date < 10) date = "0" + date;
                 var prevDateString = year + month + date;
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 84b0c0b... basic working app
                 var currentDate = data.values.max;
                 year = String(currentDate.getFullYear());
                 month = String(currentDate.getMonth() + 1);
@@ -90,7 +123,11 @@
                 if (month < 10) month = "0" + month;
                 if (date < 10) date = "0" + date;
                 var currentDateString = year + month + date;
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> 84b0c0b... basic working app
                 $("#<%=hifPrevDate.ClientID%>").val(prevDateString);
                 $("#<%=hifCurrentDate.ClientID%>").val(currentDateString);
 
@@ -98,7 +135,11 @@
 
             var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
             $("#dateSlider").dateRangeSlider({
+<<<<<<< HEAD
                 bounds: { min: new Date(2012, 0, 1), max: new Date(2013, 11, 31) },
+=======
+                bounds: { min: new Date(2013, 0, 1), max: new Date(2013, 11, 31) },
+>>>>>>> 84b0c0b... basic working app
                 defaultValues: { min: new Date(2013, 1, 10), max: new Date(2013, 4, 22) },
                 scales: [{
                     first: function(value) { return value; },
@@ -201,12 +242,17 @@
         </tr>
         <tr>
             <td colspan="2">
+<<<<<<< HEAD
                 <div id="dateSlider" style="width: 100%; margin-top: 5%; margin-bottom: 10%" align="center">
+=======
+                <div id="dateSlider" style="width: 50%; margin-top: 5%; margin-bottom: 10%" align="center">
+>>>>>>> 84b0c0b... basic working app
                 </div>
             </td>
         </tr>
         <tr style="margin-top: 15%">
             <td colspan="2">
+<<<<<<< HEAD
                 <asp:Button ID="btnSubmit" Text="Submit" runat="server" Width="100%" OnClick="btnSubmit_Click" />
             </td>
         </tr>
@@ -234,6 +280,21 @@
         <asp:HiddenField ID="hifPrevDate" runat="server"></asp:HiddenField>
         <asp:HiddenField ID="hifCurrentDate" runat="server"></asp:HiddenField>
     </div>
+=======
+                <asp:Button ID="btnSubmit" Text="Submit" runat="server" Width="50%" OnClick="btnSubmit_Click" />
+            </td>
+        </tr>
+    </table>
+    <asp:HiddenField ID="hifModel" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifVersion" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifMode" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifEnv" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifRestriction" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifCustomer" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifType" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifPrevDate" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifCurrentDate" runat="server"></asp:HiddenField>
+>>>>>>> 84b0c0b... basic working app
     </form>
 </body>
 </html>

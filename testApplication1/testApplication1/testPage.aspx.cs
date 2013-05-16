@@ -8,7 +8,10 @@ using System.Data;
 using System.Configuration;
 using System.Data.SqlClient;
 using Excel = Microsoft.Office.Interop.Excel;
+<<<<<<< HEAD
 using System.Threading;
+=======
+>>>>>>> 84b0c0b... basic working app
 
 namespace testApplication1
 {
@@ -21,6 +24,7 @@ namespace testApplication1
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
  
             String typeValue;
             String modelValue;
@@ -39,14 +43,37 @@ namespace testApplication1
                 tableType = "rvscores";
             
 
+=======
+            Console.WriteLine(hifType.Value);
+            String typeValue = hifType.Value;
+            String modelValue = hifModel.Value;
+            String previousDate = hifPrevDate.Value;
+            String currentDate = hifCurrentDate.Value;
+            previousDate = "20130502";
+            previousDate = "20130503";
+            String tableType="";
+            //if ((typeValue=="Scores") && (modelValue=="Risk View"))
+            //{
+                tableType = "rvscores";
+           // }
+
+            DataSet dsMonth = new DataSet();
+>>>>>>> 84b0c0b... basic working app
             ConnectionStringSettings cs;
             cs = ConfigurationManager.ConnectionStrings["DQConnectionString"];
             String connString = cs.ConnectionString;
             SqlConnection dbConnection = new SqlConnection(connString);
+<<<<<<< HEAD
             String sqlScoresCompare;
             sqlScoresCompare = "SCORES_COMPARE_SCRIPT";
             
             SqlCommand dbCommand = new SqlCommand(sqlScoresCompare, dbConnection);
+=======
+            String query;
+            query = "SCORES_COMPARE_SCRIPT";
+            
+            SqlCommand dbCommand = new SqlCommand(query, dbConnection);
+>>>>>>> 84b0c0b... basic working app
             dbCommand.CommandType = CommandType.StoredProcedure;
             
             dbCommand.Parameters.Add(new SqlParameter("@previous", previousDate));
@@ -60,12 +87,18 @@ namespace testApplication1
             }
             catch (SqlException)
             {
+<<<<<<< HEAD
                 Console.WriteLine("SQL Exception occured in submit button click event");
+=======
+
+
+>>>>>>> 84b0c0b... basic working app
             }
             finally
             {
 
                 dbConnection.Close();
+<<<<<<< HEAD
 
                 //updating the excel document
                 Excel.Application excelApp = new Excel.Application();
@@ -79,6 +112,14 @@ namespace testApplication1
                 Excel.Workbook sampleWorkBook = excelApp.Workbooks.Open(workbookPath, 0, false, 5, "", "",
                                 false, Excel.XlPlatform.xlWindows, "", true, true, 0, true, false, false);
                 
+=======
+                Excel.Application excelApp = new Excel.Application();
+                excelApp.Visible = true;
+                string workbookPath = "C:\\Users\\parevi01\\Documents\\LexisNexis\\Compare_Reports_v03.xlsx";
+                Excel.Workbook sampleWorkBook = excelApp.Workbooks.Open(workbookPath, 0, false, 5, "", "",
+                                false, Excel.XlPlatform.xlWindows, "", true, true, 0, true, false, false);
+
+>>>>>>> 84b0c0b... basic working app
                 sampleWorkBook.RefreshAll();
 
                 System.Threading.Thread.Sleep(2000);
@@ -87,6 +128,7 @@ namespace testApplication1
                 excelApp.Workbooks.Close();
                 excelApp.Quit();
 
+<<<<<<< HEAD
 
                 excelApp = new Excel.Application();
                 excelApp.Visible = true;
@@ -94,10 +136,13 @@ namespace testApplication1
                 sampleWorkBook = excelApp.Workbooks.Open(workbookPath, 0, false, 5, "", "",
                                 false, Excel.XlPlatform.xlWindows, "", true, true, 0, true, false, false);
 
+=======
+>>>>>>> 84b0c0b... basic working app
             }
            
     
         }
+<<<<<<< HEAD
 
         [System.Web.Services.WebMethod]
         public static string GetText()
@@ -108,5 +153,7 @@ namespace testApplication1
             }
             return "Loading finished";
         }
+=======
+>>>>>>> 84b0c0b... basic working app
     }
 }
