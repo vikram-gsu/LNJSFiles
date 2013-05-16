@@ -27,27 +27,57 @@
             $("select").selectbox();
             $("#radio").buttonset();
             $("#btnSubmit").button();
+            var radioSelected;
             $("input:radio[name=radio]").click(function() {
 
-                var radioSelected = $("#radio :radio:checked + label").text();
+                radioSelected = $("#radio :radio:checked + label").text();
+                $("#<%=hifType.ClientID%>").val(radioSelected);
                 //alert(radioSelected);
 
             });
             $("#btnSubmit").click(function() {
-                var modelValue = $("#model_id option:selected").val();
-                //alert(modelValue);
-                //var prevDate = $("#dateSlider").dateRangeSlider("option", "bounds");
-                var prevDate = $("#dateSlider").dateRangeSlider("bounds");
-                //var prevDate = $("div.ui-rangeSlider-label ui-rangeSlider
-                alert(prevDate.min.toString());
+                var modelVal = $("#model_id option:selected").val();
+                var versionVal = $("#version_id option:selected").val();
+                var modeVal = $("#mode_id option:selected").val();
+                var envVal = $("#env_id option:selected").val();
+                var restrictionVal = $("#restriction_id option:selected").val();
+                var customerVal = $("#customer_id option:selected").val();
 
+                $("#<%=hifModel.ClientID%>").val(modelVal);
+                $("#<%=hifVersion.ClientID%>").val(versionVal);
+                $("#<%=hifMode.ClientID%>").val(modeVal);
+                $("#<%=hifEnv.ClientID%>").val(envVal);
+                $("#<%=hifRestriction.ClientID%>").val(restrictionVal);
+                $("#<%=hifCustomer.ClientID%>").val(customerVal);
+                alert(radioSelected);
+            });
+
+            $("#dateSlider").bind("userValuesChanged", function(e, data) {
+                var prevDate = data.values.min;
+                var year = String(prevDate.getFullYear());
+                var month = String(prevDate.getMonth() + 1);
+                var date = String(prevDate.getDate());
+                if (month < 10) month = "0" + month;
+                if (date < 10) date = "0" + date;
+                var prevDateString = year + month + date;
+                
+                var currentDate = data.values.max;
+                year = String(currentDate.getFullYear());
+                month = String(currentDate.getMonth() + 1);
+                date = String(currentDate.getDate());
+                if (month < 10) month = "0" + month;
+                if (date < 10) date = "0" + date;
+                var currentDateString = year + month + date;
+                
+                $("#<%=hifPrevDate.ClientID%>").val(prevDateString);
+                $("#<%=hifCurrentDate.ClientID%>").val(currentDateString);
 
             });
 
             var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
             $("#dateSlider").dateRangeSlider({
-                bounds: { min: new Date(2012, 0, 1), max: new Date(2012, 11, 31, 12, 59, 59) },
-                defaultValues: { min: new Date(2012, 1, 10), max: new Date(2012, 4, 22) },
+                bounds: { min: new Date(2013, 0, 1), max: new Date(2013, 11, 31) },
+                defaultValues: { min: new Date(2013, 1, 10), max: new Date(2013, 4, 22) },
                 scales: [{
                     first: function(value) { return value; },
                     end: function(value) { return value; },
@@ -114,7 +144,7 @@
                         <option value="FraudPoint">Fraud Point</option>
                         <option value="LeadIntegrity">Lead Integrity</option>
                     </select>
-                    <select name="selVersion" id="version" tabindex="2">
+                    <select name="selVersion" id="version_id" tabindex="2">
                         <option value="">Version</option>
                         <option value="4.0">4.0</option>
                         <option value="3.0">3.0</option>
@@ -143,18 +173,25 @@
         </tr>
         <tr>
             <td colspan="2">
-                <div id="dateSlider" style="width: 50%; margin-top: 5%; margin-bottom:10%" align="center">
+                <div id="dateSlider" style="width: 50%; margin-top: 5%; margin-bottom: 10%" align="center">
                 </div>
             </td>
         </tr>
-        <tr style="margin-top:15%">
+        <tr style="margin-top: 15%">
             <td colspan="2">
-            
-                <asp:Button ID="btnSubmit" Text="Submit" runat="server" Width="50%" />
-                
+                <asp:Button ID="btnSubmit" Text="Submit" runat="server" Width="50%" OnClick="btnSubmit_Click" />
             </td>
         </tr>
     </table>
+    <asp:HiddenField ID="hifModel" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifVersion" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifMode" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifEnv" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifRestriction" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifCustomer" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifType" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifPrevDate" runat="server"></asp:HiddenField>
+    <asp:HiddenField ID="hifCurrentDate" runat="server"></asp:HiddenField>
     </form>
 </body>
 </html>

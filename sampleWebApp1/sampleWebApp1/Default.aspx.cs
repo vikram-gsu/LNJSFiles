@@ -18,6 +18,7 @@ namespace sampleWebApp1
             Excel.Workbook sampleWorkBook = excelApp.Workbooks.Open(workbookPath, 0, false, 5, "", "",  
                             false, Excel.XlPlatform.xlWindows, "", true, true, 0, true, false, false);
 
+            sampleWorkBook.RefreshAll();
 
             Excel.Sheets sheets = sampleWorkBook.Worksheets;
             Excel.Worksheet mySheet = (Excel.Worksheet)sheets.get_Item("sheet1");
