@@ -62,10 +62,13 @@
     <Content Include="CSS\iThing-min.css" />
     <Content Include="CSS\iThing.css" />
     <Content Include="CSS\jquery.selectbox.css" />
+    <Content Include="CSS\jquery.ui.progressbar.min.css" />
     <Content Include="Default.aspx" />
     <Content Include="CSS\jquery-ui.css" />
+    <Content Include="img\lexislogo.gif" />
     <Content Include="Scripts\jQDateRangeSlider-withRuler-min.js" />
-    <Content Include="Scripts\jquery-1.2.6-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-ui-1.8.16.custom.min.js" />
@@ -73,6 +76,7 @@
     <Content Include="Scripts\jquery.selectbox-0.2.js" />
     <Content Include="img\select-icons.png" />
     <Content Include="Scripts\jquery.selectbox-0.2.min.js" />
+    <Content Include="Scripts\jquery.ui.progressbar.js" />
     <Content Include="testPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -94,6 +98,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Compare_Reports_v03.xlsx" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -113,8 +120,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52369</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/CompareTool</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

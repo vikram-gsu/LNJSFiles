@@ -5,7 +5,7 @@
 <head id="Head1">
     <title></title>
 
-    <script src="Scripts/jquery-1.7.2.min.js" type="text/javascript"></script>
+    <script src="Scripts/jquery-1.7.2.js" type="text/javascript"></script>
 
     <link href="CSS/jquery.selectbox.css" rel="stylesheet" type="text/css" />
 
@@ -21,20 +21,18 @@
 
     <link href="CSS/iThing.css" rel="stylesheet" type="text/css" />
 
+      <link href="CSS/jquery.ui.progressbar.min.css" rel="stylesheet" type="text/css" />
+
+    <script src="Scripts/jquery.ui.progressbar.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         $(function() {
             $("select").selectbox();
-            $("#radio").buttonset();
+            
             $("#btnSubmit").button();
-            var radioSelected;
-            $("input:radio[name=radio]").click(function() {
+            $("#progressbar").progressbar({ value: 0 });
 
-                radioSelected = $("#radio :radio:checked + label").text();
-                $("#<%=hifType.ClientID%>").val(radioSelected);
-                //alert(radioSelected);
-
-            });
+           
             $("#btnSubmit").click(function() {
                 var modelVal = $("#model_id option:selected").val();
                 var versionVal = $("#version_id option:selected").val();
@@ -49,8 +47,32 @@
                 $("#<%=hifEnv.ClientID%>").val(envVal);
                 $("#<%=hifRestriction.ClientID%>").val(restrictionVal);
                 $("#<%=hifCustomer.ClientID%>").val(customerVal);
-                alert(radioSelected);
+
+                var intervalID = setInterval(updateProgress, 250);
+                $.ajax({
+                    type: "POST",
+                    url: "testPage.aspx/GetText",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function(msg) {
+                        $("#progressbar").progressbar("value", 100);
+                        $("#result").text(msg.d);
+                        clearInterval(intervalID);
+                    }
+
+                });
+
+                //alert(radioSelected);
             });
+
+            function updateProgress() {
+                var value = $("#progressbar").progressbar("option", "value");
+                if (value < 100) {
+                    $("#progressbar").progressbar("value", value + 0.25);
+                }
+            }
 
             $("#dateSlider").bind("userValuesChanged", function(e, data) {
                 var prevDate = data.values.min;
@@ -60,7 +82,7 @@
                 if (month < 10) month = "0" + month;
                 if (date < 10) date = "0" + date;
                 var prevDateString = year + month + date;
-                
+
                 var currentDate = data.values.max;
                 year = String(currentDate.getFullYear());
                 month = String(currentDate.getMonth() + 1);
@@ -68,7 +90,7 @@
                 if (month < 10) month = "0" + month;
                 if (date < 10) date = "0" + date;
                 var currentDateString = year + month + date;
-                
+
                 $("#<%=hifPrevDate.ClientID%>").val(prevDateString);
                 $("#<%=hifCurrentDate.ClientID%>").val(currentDateString);
 
@@ -76,7 +98,7 @@
 
             var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
             $("#dateSlider").dateRangeSlider({
-                bounds: { min: new Date(2013, 0, 1), max: new Date(2013, 11, 31) },
+                bounds: { min: new Date(2012, 0, 1), max: new Date(2013, 11, 31) },
                 defaultValues: { min: new Date(2013, 1, 10), max: new Date(2013, 4, 22) },
                 scales: [{
                     first: function(value) { return value; },
@@ -104,40 +126,46 @@
         {
             width: 200px;
         }
-        #radio
+        table
         {
             background-color: #2d2d2d;
         }
+        #btnSubmit
+        {
+            background-color: #2d2d2d;
+            color: #EBB52D;
+            border: solid 1px #515151;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: normal;
+            height: 30px;
+            position: relative;
+            width: 200px;
+        }
+        label
+        {
+            background-color: #2d2d2d;
+            color: #EBB52D;
+        }
+        #lnHeader
+        {
+            background-color: #c8c8c8;
+        }
+        body
+        {
+            background-color: #F0F0F0;
+        }
     </style>
 </head>
-<body style="margin-left: auto; margin-right: auto; margin-top: 10%; width: 100%">
+<body style="margin-left: auto; margin-right: auto; margin-top: 5%; width: 100%">
     <form id="form1" runat="server">
+    <div id="lnHeader">
+        <img src="img/lexislogo.gif" alt="LexisNexis" /></div>
     <table width="100%">
         <tr>
+            <%--showing all the selection parameter dropdowns--%>
             <td>
-                <div id="radio" align="center">
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="radio" id="radioScores" name="radio" /><label for="radioScores">Scores</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="radio" id="radioAttrs" name="radio" checked="checked" /><label for="radioAttrs">Attributes</label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="radio" id="radioReasonCodes" name="radio" /><label for="radioReasonCodes">Reason
-                                    Codes</label>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </td>
-            <td>
-                <div width="50%" align="center">
+                <div width="100%" align="center" style="width: 100%; margin-top: 5%">
                     <select name="selModel" id="model_id" tabindex="1">
                         <option value="">Model </option>
                         <option value="RiskView">Risk View</option>
@@ -173,25 +201,39 @@
         </tr>
         <tr>
             <td colspan="2">
-                <div id="dateSlider" style="width: 50%; margin-top: 5%; margin-bottom: 10%" align="center">
+                <div id="dateSlider" style="width: 100%; margin-top: 5%; margin-bottom: 10%" align="center">
                 </div>
             </td>
         </tr>
         <tr style="margin-top: 15%">
             <td colspan="2">
-                <asp:Button ID="btnSubmit" Text="Submit" runat="server" Width="50%" OnClick="btnSubmit_Click" />
+                <asp:Button ID="btnSubmit" Text="Submit" runat="server" Width="100%" OnClick="btnSubmit_Click" />
+            </td>
+        </tr>
+        <tr style="margin-top: 15%">
+            <td colspan="2">
+                <div id="progressbar" style="width: 100%; margin-top: 5%;" align="center">
+                </div>
+            </td>
+        </tr>
+        <tr style="margin-top: 15%">
+            <td colspan="2">
+                <div id="result" style="width: 100%; margin-top: 5%;" align="center">
+                </div>
             </td>
         </tr>
     </table>
-    <asp:HiddenField ID="hifModel" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifVersion" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifMode" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifEnv" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifRestriction" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifCustomer" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifType" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifPrevDate" runat="server"></asp:HiddenField>
-    <asp:HiddenField ID="hifCurrentDate" runat="server"></asp:HiddenField>
+    <%--all the hiddenfields to pass the jquery values to the code behind--%>
+    <div>
+        <asp:HiddenField ID="hifModel" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifVersion" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifMode" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifEnv" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifRestriction" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifCustomer" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifPrevDate" runat="server"></asp:HiddenField>
+        <asp:HiddenField ID="hifCurrentDate" runat="server"></asp:HiddenField>
+    </div>
     </form>
 </body>
 </html>

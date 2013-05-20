@@ -86,15 +86,6 @@ namespace testApplication1 {
         protected global::System.Web.UI.WebControls.HiddenField hifCustomer;
         
         /// <summary>
-        /// hifType control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hifType;
-        
-        /// <summary>
         /// hifPrevDate control.
         /// </summary>
         /// <remarks>

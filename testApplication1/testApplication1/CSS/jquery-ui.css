@@ -211,6 +211,11 @@ input.ui-button {
 /* button sets */
 .ui-buttonset {
 	margin-right: 7px;
+	background-color: #2d2d2d;
+    color: #EBB52D;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;            
 }
 .ui-buttonset .ui-button {
 	margin-left: 0;
@@ -409,7 +414,6 @@ button.ui-button::-moz-focus-inner {
 	white-space: nowrap;
 	width: 90%;
 	overflow: hidden;
-	text-overflow: ellipsis;
 }
 .ui-dialog .ui-dialog-titlebar-close {
 	position: absolute;
